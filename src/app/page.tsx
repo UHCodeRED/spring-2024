@@ -27,9 +27,8 @@ export default function Home() {
         >
           <object
             className="animate-floaty"
-            style={{ display: "inline" }}
+            style={{ display: "inline", width: "60vh", maxWidth: "90vw" }}
             data="/logo-animated.svg"
-            width={600}
           />
         </div>
         <p
