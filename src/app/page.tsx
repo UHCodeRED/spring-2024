@@ -25,13 +25,11 @@ export default function Home() {
             padding: 20,
           }}
         >
-          <Image
+          <object
             className="animate-floaty"
             style={{ display: "inline" }}
-            src="/logo.svg"
-            alt="CodeRED Genesis Logo"
+            data="/logo-animated.svg"
             width={600}
-            height={100}
           />
         </div>
         <p
