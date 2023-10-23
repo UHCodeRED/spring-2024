@@ -9,9 +9,9 @@ export default function Home() {
     const stars = [];
     const squareGap = 200;
 
-    for (let r = 0; r < 20; r++) {
-      for (let c = 0; c < 10; c++) {
-        const left = (c + Math.random()) * squareGap;
+    for (let r = -1; r < 20; r++) {
+      for (let c = -1; c < 10; c++) {
+        const x = (c + Math.random()) * squareGap;
         const top = (r + Math.random()) * squareGap;
 
         const scale = -0.1 + 0.4 * Math.random() + d / 10;
@@ -21,7 +21,7 @@ export default function Home() {
         const starStyle: CSSProperties = {
           position: "absolute",
           animation: `bulge ${animTime}s linear infinite`,
-          left,
+          left: `calc(${x / 20}vw + ${x / 5}px)`,
           top,
           scale,
           opacity,
