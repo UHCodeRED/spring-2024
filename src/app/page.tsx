@@ -87,6 +87,7 @@ export default function Home() {
           {text}
         </ParallaxLayer>
       </Parallax>
+      <div className="animate-wiggle animate-bulge animate-floaty" />
     </main>
   );
 }
