@@ -15,17 +15,42 @@ const config: Config = {
       },
       keyframes: {
         wiggle: {
-          "0%, 100%": { transform: "rotate(-3deg)" },
-          "50%": { transform: "rotate(3deg)" },
+          "0%, 100%": { transform: "rotate(-5deg)" },
+          "50%": { transform: "rotate(5deg)" },
         },
         floaty: {
           "0%, 100%": { transform: "translate(0px, 0.5vh)" },
           "50%": { transform: "translate(0px, -0.5vh)" },
         },
+        bulge: {
+          "0%, 100%": { transform: "scale(1) rotate(0deg)" },
+          "25%": { transform: "scale(0.75) rotate(-5deg)" },
+          "50%": { transform: "scale(0.5) rotate(0deg)" },
+          "75%": { transform: "scale(0.75) rotate(5deg)" },
+        },
+        shrink: {
+          "0%": {
+            transform: "scale(1)",
+          },
+          "100%": {
+            transform: "scale(0.7)",
+          },
+        },
+        spin: {
+          "0%": {
+            transform: "rotate(0deg)",
+          },
+          "100%": {
+            transform: "rotate(360deg)",
+          },
+        },
       },
       animation: {
-        wiggle: "wiggle 1s ease-in-out infinite",
+        wiggle: `wiggle 1s ease-in-out infinite`,
+        bulge: `bulge 1s ease-in-out infinite `,
         floaty: "floaty 2s ease-in-out infinite",
+        shrink: "shrink 1s linear infinite",
+        spin: "spin 5s linear infinite",
       },
     },
   },
