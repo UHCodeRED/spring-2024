@@ -1,76 +1,53 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import Image from "next/image";
-import { Parallax, ParallaxLayer } from "@react-spring/parallax";
-import { CSSProperties } from "react";
+import { CSSProperties, useEffect, useState } from "react";
 
 export default function Home() {
-  const starMatrix = (d: number) => {
-    const stars = [];
-    const squareGap = 200;
+  const [timer, setTimer] = useState("");
 
-    for (let r = -1; r < 20; r++) {
-      for (let c = -1; c < 10; c++) {
-        const x = (c + Math.random()) * squareGap;
-        const top = (r + Math.random()) * squareGap;
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      const i =
+        window.scrollY / (document.body.offsetHeight - window.innerHeight);
 
-        const scale = -0.1 + 0.4 * Math.random() + d / 10;
-        const animTime = Math.ceil(Math.random() * 3) / 2 + 0.5;
-        const opacity = 0.2 + d / 3;
+      document.body.style.setProperty(
+        "--scroll",
+        `${Math.min(window.scrollY / 150, 0.9999)}`
+      );
+    });
 
-        const starStyle: CSSProperties = {
-          position: "absolute",
-          animation: `bulge ${animTime}s linear infinite`,
-          left: `calc(${x / 20}vw + ${x / 5}px)`,
-          top,
-          scale,
-          opacity,
-        };
+    const updateTimer = () => {
+      const startDate = new Date(2024, 1, 10, 9);
+      const nowDate = new Date();
 
-        const star = (
-          <Image
-            key={`star${r},${c},${d}`}
-            src="/star.svg"
-            width={61}
-            height={61}
-            style={starStyle}
-            alt={"star"}
-          />
-        );
+      let msDiff = startDate.getTime() - nowDate.getTime();
 
-        stars.push(star);
-      }
-    }
+      msDiff /= 1000;
+      const seconds = Math.floor(msDiff) % 60;
 
-    return <div>{stars}</div>;
-  };
+      msDiff = (msDiff - seconds) / 60;
+      const minutes = Math.floor(msDiff) % 60;
 
-  const logo = (
-    <div style={styles.centeredGroup}>
-      <div
-        style={{
-          textAlign: "center",
-          padding: 20,
-        }}
-      >
-        <object style={styles.logo} data="/logo-animated.svg" />
-      </div>
-    </div>
-  );
+      msDiff = (msDiff - minutes) / 60;
+      const hours = Math.floor(msDiff) % 24;
 
-  const text = (
-    <div style={styles.centeredGroup}>
-      <p style={styles.floatyText}>
-        Houston&apos;s Premier Hackathon!
-        <br />
-        Coming February 10th-11th!
-      </p>
-    </div>
-  );
+      msDiff = (msDiff - hours) / 24;
+      const days = Math.floor(msDiff);
+
+      const newTimer = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      setTimer(newTimer);
+    };
+    updateTimer();
+
+    setInterval(updateTimer, 500);
+  });
 
   return (
     <main style={styles.page}>
-      <Parallax pages={2} config={{ tension: 10000, friction: 100 }}>
+      {/* <Parallax pages={2} config={{ tension: 10000, friction: 100 }}>
         <ParallaxLayer offset={0} speed={-0.9}>
           {starMatrix(0)}
         </ParallaxLayer>
@@ -86,11 +63,168 @@ export default function Home() {
         <ParallaxLayer offset={1} speed={0.2}>
           {text}
         </ParallaxLayer>
-      </Parallax>
-      <div className="animate-wiggle animate-bulge animate-floaty" />
+      </Parallax> */}
+      {/* {logo} */}
+      <div className="animate-wiggle animate-bulge animate-floaty animate-shrink" />
+
+      <div
+        className="animate-floaty"
+        style={{
+          position: "sticky",
+          top: 0,
+          backgroundColor: "black",
+          boxShadow: "0px 0px 50px 50px black",
+        }}
+      >
+        <object
+          // className="animate-floaty"
+          style={styles.logo}
+          data="/logo-animated.svg"
+        />
+      </div>
+
+      <RegistrationSection timer={timer} />
+      <WhatIsSection />
+      <EventDetailsSection />
+      <SponsorSection />
+      <BigPlanetFooter />
     </main>
   );
 }
+
+const RegistrationSection = ({ timer }: { timer: string }) => {
+  return (
+    <div style={{ marginTop: 150, fontSize: "5vh" }}>
+      <div>{`CodeRED starts in ${timer}`}</div>
+      <div>
+        Register now at{" "}
+        <a
+          style={{ textDecoration: "underline", color: "red" }}
+          href="https://register.uhcode.red"
+        >
+          register.uhcode.red
+        </a>
+        !
+      </div>
+    </div>
+  );
+};
+
+const WhatIsSection = () => {
+  return (
+    <div style={{ marginTop: 200, fontSize: "5vh" }}>
+      What is Code<span style={{ color: "red" }}>RED</span>?
+      <br />
+      <div
+        style={{
+          fontSize: "3vh",
+          width: 900,
+          maxWidth: "90vw",
+          display: "inline-block",
+          textAlign: "left",
+        }}
+      >
+        <p>
+          {`CodeRED is a 24-hour hackathon event organized by CougarCS, the
+          largest student-run computer science organization at the University of
+          Houston. It's an event for people to come together and innovate by
+          pushing their limits to create something amazing!`}
+        </p>
+        <br />
+        <p>
+          {`Want to learn something new, network with like-minded computer
+          scientists, and push the boundaries of your skill? Come join us at
+          CodeRED Genesis to solve real-life problems, explore new
+          possibilities, and shoot for the stars!`}
+        </p>
+      </div>
+    </div>
+  );
+};
+
+const EventDetailsSection = () => {
+  return (
+    <div style={{ marginTop: 200, fontSize: "5vh" }}>
+      Event Details
+      <br />
+      <div
+        style={{
+          fontSize: "3vh",
+          width: 900,
+          maxWidth: "90vw",
+          display: "inline-block",
+          textAlign: "left",
+        }}
+      >
+        <p>
+          Code<span style={{ color: "red" }}>RED</span> Genesis is an in-person
+          event at the University of Houston on February 10th-11th, 2024. More
+          time and place details will be released soon!
+        </p>
+      </div>
+    </div>
+  );
+};
+
+const SponsorSection = () => {
+  return (
+    <div style={{ marginTop: 200, fontSize: "5vh" }}>
+      <div>{"Our Sponsors"}</div>
+      <img
+        style={{
+          display: "inline-block",
+          width: 600,
+          maxWidth: "90vw",
+          marginTop: 20,
+        }}
+        src="/ConocoPhillips.png"
+      />
+      <br />
+      <div
+        style={{
+          display: "inline-grid",
+          gridTemplateColumns: "1fr 1fr",
+          width: 600,
+          maxWidth: "90vw",
+          marginTop: 50,
+          gap: 50,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <img style={{ display: "inline-block" }} src="/LYB.png" />
+        <img style={{ display: "inline-block" }} src="/PROS.png" />
+        <img style={{ display: "inline-block" }} src="/Google.png" />
+        <img style={{ display: "inline-block" }} src="/RedBull.png" />
+      </div>
+      <br />
+      <img
+        style={{
+          display: "inline-block",
+          width: 300,
+          maxWidth: "45vw",
+          marginTop: 50,
+        }}
+        src="/MLH.png"
+      />
+      <br />
+    </div>
+  );
+};
+
+const BigPlanetFooter = () => {
+  return (
+    <div style={{ overflow: "hidden", paddingTop: 70 }}>
+      <object
+        style={{
+          width: "100vw",
+          filter: "drop-shadow(0px 0px 40px red)",
+        }}
+        data="/big-planet.svg"
+      ></object>
+    </div>
+  );
+};
 
 const styles: {
   [item: string]: CSSProperties;
@@ -108,7 +242,10 @@ const styles: {
     display: "inline",
     width: "60vh",
     maxWidth: "90vw",
-    animation: "floaty 2s ease-in-out infinite",
+    // animation: "shrink 2s ease-in-out infinite",
+    animation: "shrink 1s linear infinite",
+    animationPlayState: "paused",
+    animationDelay: "calc(var(--scroll) * -1s)",
   },
   floatyText: {
     fontSize: "5vh",
@@ -118,6 +255,9 @@ const styles: {
   },
   page: {
     color: "white",
-    height: "100vh",
+    // height: "100vh",
+    textAlign: "center",
+    paddingTop: "35vh",
+    // overflowX: "hidden",
   },
 };

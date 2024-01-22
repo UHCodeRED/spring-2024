@@ -28,11 +28,29 @@ const config: Config = {
           "50%": { transform: "scale(0.5) rotate(0deg)" },
           "75%": { transform: "scale(0.75) rotate(5deg)" },
         },
+        shrink: {
+          "0%": {
+            transform: "scale(1)",
+          },
+          "100%": {
+            transform: "scale(0.7)",
+          },
+        },
+        spin: {
+          "0%": {
+            transform: "rotate(0deg)",
+          },
+          "100%": {
+            transform: "rotate(360deg)",
+          },
+        },
       },
       animation: {
         wiggle: `wiggle 1s ease-in-out infinite`,
         bulge: `bulge 1s ease-in-out infinite `,
         floaty: "floaty 2s ease-in-out infinite",
+        shrink: "shrink 1s linear infinite",
+        spin: "spin 5s linear infinite",
       },
     },
   },
