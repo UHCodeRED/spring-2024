@@ -198,7 +198,7 @@ const SponsorSection = () => {
         <img style={{ display: "inline-block" }} src="/RedBull.png" />
       </div>
       <br />
-      <img
+      {/* <img
         style={{
           display: "inline-block",
           width: 300,
@@ -206,7 +206,7 @@ const SponsorSection = () => {
           marginTop: 50,
         }}
         src="/MLH.png"
-      />
+      /> */}
       <br />
     </div>
   );
