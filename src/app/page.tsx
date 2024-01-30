@@ -83,7 +83,8 @@ export default function Home() {
         />
       </div>
 
-      <RegistrationSection timer={timer} />
+      <TimerSection timer={timer} />
+      <RegistrationSection />
       <WhatIsSection />
       <EventDetailsSection />
       <SponsorSection />
@@ -92,19 +93,39 @@ export default function Home() {
   );
 }
 
-const RegistrationSection = ({ timer }: { timer: string }) => {
+const TimerSection = ({ timer }: { timer: string }) => {
   return (
     <div style={{ marginTop: 150, fontSize: "5vh" }}>
-      <div>{`CodeRED starts in ${timer}`}</div>
       <div>
-        Register now at{" "}
-        <a
-          style={{ textDecoration: "underline", color: "red" }}
-          href="https://register.uhcode.red"
-        >
-          register.uhcode.red
-        </a>
-        !
+        Code<span style={{ color: "red" }}>RED</span>
+        {` starts in ${timer}`}
+      </div>
+    </div>
+  );
+};
+
+const RegistrationSection = () => {
+  return (
+    <div style={{ marginTop: 150, fontSize: "5vh" }}>
+      <div>
+        Registration has <span style={{ color: "red" }}>closed</span>!
+      </div>
+      <div
+        style={{
+          fontSize: "3vh",
+          width: 900,
+          maxWidth: "90vw",
+          display: "inline-block",
+          textAlign: "left",
+        }}
+      >
+        <p>
+          {`For those who have already registered, we will be reaching out via email soon! If you did not register before the deadline but would still like to participate, we may be accepting walk-ins at the end of check-in on Saturday morning. However, there is `}
+          <span style={{ textDecoration: "underline", color: "red" }}>
+            no guarantee
+          </span>
+          {` that a spot will be available to you.`}
+        </p>
       </div>
     </div>
   );
@@ -125,7 +146,8 @@ const WhatIsSection = () => {
         }}
       >
         <p>
-          {`CodeRED is a 24-hour hackathon event organized by CougarCS, the
+          Code<span style={{ color: "red" }}>RED</span>
+          {` is a 24-hour hackathon event organized by CougarCS, the
           largest student-run computer science organization at the University of
           Houston. It's an event for people to come together and innovate by
           pushing their limits to create something amazing!`}
@@ -198,15 +220,15 @@ const SponsorSection = () => {
         <img style={{ display: "inline-block" }} src="/RedBull.png" />
       </div>
       <br />
-      {/* <img
+      <img
         style={{
           display: "inline-block",
-          width: 300,
-          maxWidth: "45vw",
+          width: 200,
+          maxWidth: "35vw",
           marginTop: 50,
         }}
-        src="/MLH.png"
-      /> */}
+        src="/Chevron.png"
+      />
       <br />
     </div>
   );
