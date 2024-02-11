@@ -17,9 +17,18 @@ export default function Countdown() {
       const currentDate = new Date();
       const currentDuration = currentDate.getTime() - startDate.getTime();
 
-      setProgress(currentDuration / fullDuration);
+      setProgress(
+        currentDuration > fullDuration ? 1 : currentDuration / fullDuration
+      );
 
       let duration = fullDuration - currentDuration;
+
+      duration = duration < 0 ? 0 : duration;
+
+      if (progress < 1 && duration === 0) {
+        // DO SOMETHING
+        new Audio("/alarm.mp3").play();
+      }
 
       const hrLeft = Math.floor(duration / (1000 * 60 * 60));
       duration -= hrLeft * (1000 * 60 * 60);
@@ -69,7 +78,7 @@ export default function Countdown() {
       </div>
       <div
         style={{
-          color: "white",
+          color: progress < 1 ? "white" : "red",
           width: "100%",
           fontSize: 50,
           textAlign: "center",
@@ -86,9 +95,9 @@ export default function Countdown() {
           left: 0,
           top: `calc(50vh - 25px)`,
           height: 50,
-          width: "calc(100% - 80px)",
+          width: "calc(100% - 120px)",
           color: "white",
-          margin: 40,
+          margin: 60,
         }}
       >
         <div
